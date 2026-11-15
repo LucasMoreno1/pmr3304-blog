@@ -1,0 +1,12 @@
+db.sqlite3
+__pycache__/
+*.pyc
+.venv/
+venv/
+staticfiles/
+.env
+_material/
+material-claude-code.zip
+entrega/
+relatorio/
+LEIA-ME.md

@@ -1,0 +1,26 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Blog{% endblock %} · Lucas Moreno Pais</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <span class="brand">Lucas Moreno Pais · Blog</span>
+      <nav>
+        {% block nav %}{% endblock %}
+        <a href="{% url 'admin:index' %}">Admin</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">PMR3304 – Sistemas de Informação · Escola Politécnica da USP</div>
+  </footer>
+</body>
+</html>
