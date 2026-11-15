@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Comment, Post
+from .models import Category, Comment, Post
 
 
 class CommentInline(admin.TabularInline):
@@ -12,6 +12,8 @@ class CommentInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'posted_at')
     search_fields = ('title', 'content')
+    list_filter = ('categories',)
+    filter_horizontal = ('categories',)
     inlines = [CommentInline]
 
 
@@ -19,3 +21,9 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('post', 'author', 'posted_at')
     list_filter = ('post',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name',)

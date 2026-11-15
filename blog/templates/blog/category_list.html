@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Categorias{% endblock %}
+
+{% block content %}
+<h1>Categorias</h1>
+<ul class="post-list">
+  {% for category in category_list %}
+  <li>
+    <a class="title" href="{% url 'blog:category_detail' category.pk %}">{{ category.name }}</a>
+    <span class="meta">({{ category.posts.count }} post{{ category.posts.count|pluralize }})</span>
+    {% if category.description %}<div class="meta">{{ category.description }}</div>{% endif %}
+  </li>
+  {% empty %}
+  <li>Nenhuma categoria cadastrada.</li>
+  {% endfor %}
+</ul>
+<p><a class="btn secondary" href="{% url 'blog:post_list' %}">Voltar aos posts</a></p>
+{% endblock %}
