@@ -13,4 +13,17 @@
   <a class="btn danger" href="{% url 'blog:post_delete' post.pk %}">Remover</a>
   <a class="btn secondary" href="{% url 'blog:post_list' %}">Voltar à lista</a>
 </div>
+
+<section class="comments">
+  <h2>Comentários ({{ post.comments.count }})</h2>
+  <p><a class="btn" href="{% url 'blog:comment_create' post.pk %}">Comentar</a></p>
+  {% for comment in post.comments.all %}
+  <div class="comment">
+    <div class="meta"><strong>{{ comment.author.get_full_name|default:comment.author.username }}</strong> · {{ comment.posted_at|date:"d/m/Y H:i" }}</div>
+    <p>{{ comment.text|linebreaksbr }}</p>
+  </div>
+  {% empty %}
+  <p class="meta">Nenhum comentário ainda.</p>
+  {% endfor %}
+</section>
 {% endblock %}
