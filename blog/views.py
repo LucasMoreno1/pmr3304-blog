@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 
 from .forms import CommentForm, PostForm
-from .models import Comment, Post
+from .models import Category, Comment, Post
 
 
 class PostListView(ListView):
@@ -62,3 +62,24 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return self.post_obj.get_absolute_url()
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'blog/category_list.html'
+
+
+class CategoryDetailView(ListView):
+    """Posts de uma categoria, reutilizando o template da listagem de posts."""
+
+    template_name = 'blog/post_list.html'
+    context_object_name = 'post_list'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        return self.category.posts.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
