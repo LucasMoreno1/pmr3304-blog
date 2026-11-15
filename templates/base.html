@@ -9,9 +9,10 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <span class="brand">Lucas Moreno Pais · Blog</span>
+      <a class="brand" href="{% url 'blog:post_list' %}">Lucas Moreno Pais · Blog</a>
       <nav>
-        {% block nav %}{% endblock %}
+        <a href="{% url 'blog:post_list' %}">Posts</a>
+        <a href="{% url 'blog:post_create' %}">Novo post</a>
         <a href="{% url 'admin:index' %}">Admin</a>
       </nav>
     </div>
